@@ -18,6 +18,7 @@ student_dao = StudentDAO.StudentDAO(mysql)
 @app.route('/')
 def index():
     students = student_dao.list_student()
+
     return render_template('index.html',students=students)
 
 @app.route('/create_student', methods=['POST',])
@@ -32,6 +33,19 @@ def create_student():
     student_dao.save_student(student)
 
     return redirect(url_for('index'))
+
+@app.route('/edit_student')
+def edit_student():
+    pass
+
+@app.route('/update_student', methods=['POST',])
+def update_student():
+    pass
+
+@app.route('/delete_student')
+def delete_student():
+    pass
+
 
 def generate_ra():
     for r in range(1):
