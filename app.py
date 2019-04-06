@@ -6,9 +6,9 @@ import random
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'toor'
+app.config['MYSQL_HOST'] = '****'
+app.config['MYSQL_USER'] = '****'
+app.config['MYSQL_PASSWORD'] = '****'
 app.config['MYSQL_DB'] = 'crud_flask'
 
 mysql = MySQL(app)
