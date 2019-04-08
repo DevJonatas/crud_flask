@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 from dao import StudentDAO
 from models import Student
+from datetime import date
 import random
 
 app = Flask(__name__)
@@ -34,13 +35,26 @@ def create_student():
 
     return redirect(url_for('index'))
 
-@app.route('/edit_student')
-def edit_student():
-    pass
+@app.route('/edit_student/<int:ra>')
+def edit_student(ra):
+    student_list = student_dao.list_student()
+    student_edit = student_dao.find_student_ra(ra)
+
+    return render_template('edit_student.html',students=student_list,student_edit=student_edit)
 
 @app.route('/update_student', methods=['POST',])
 def update_student():
-    pass
+    id = request.form['id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    phone = request.form['phone']
+
+    date_now = date.today()
+
+    student = Student.Student(id, None, None, first_name, last_name, phone, None, date_now)
+    student_dao.save_student(student)
+
+    return redirect(url_for('index'))
 
 @app.route('/delete_student')
 def delete_student():
