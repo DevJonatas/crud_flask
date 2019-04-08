@@ -24,12 +24,12 @@ def index():
 
 @app.route('/create_student', methods=['POST',])
 def create_student():
-    cpf = request.form['cpf']
+    doc_id = request.form['doc_id']
     ra = generate_ra()
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     phone = request.form['phone']
-    student = Student.Student(None,ra, cpf, first_name, last_name, phone, None, None)
+    student = Student.Student(None,ra, doc_id, first_name, last_name, phone, None, None)
 
     student_dao.save_student(student)
 
@@ -56,9 +56,11 @@ def update_student():
 
     return redirect(url_for('index'))
 
-@app.route('/delete_student')
-def delete_student():
-    pass
+@app.route('/delete_student/<int:id>')
+def delete_student(id):
+    student_dao.delete_student(id)
+
+    return redirect(url_for('index'))
 
 
 def generate_ra():

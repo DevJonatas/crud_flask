@@ -23,8 +23,8 @@
                 <div class="card card-body">
                     <form action="/create_student" method="POST">
                         <div class="form-group">
-                            <label>cpf</label>
-                            <input type="number" class="form-control" placeholder="Enter your CPF" name="cpf">
+                            <label>Document Id</label>
+                            <input type="number" class="form-control" placeholder="Enter your Document Id" name="doc_id">
 
                             <label>First name</label>
                             <input type="text" class="form-control" placeholder="Enter your First Name" name="first_name">
@@ -47,7 +47,7 @@
       <thead>
         <tr>
           <th scope="col">Ra</th>
-          <th scope="col">CPF</th>
+          <th scope="col">Document ID</th>
           <th scope="col">First name</th>
           <th scope="col">Last name</th>
           <th scope="col">Phone</th>
@@ -60,7 +60,7 @@
       {% for obj in students %}
         <tr>
           <th scope="row">{{ obj.ra }}</th>
-          <td>{{ obj.cpf }}</td>
+          <td>{{ obj.doc_id }}</td>
           <td>{{ obj.first_name }}</td>
           <td>{{ obj.last_name }}</td>
           <td>{{ obj.phone }}</td>
@@ -69,7 +69,7 @@
           <td>
               <a class="edit" href="{{ url_for('edit_student',ra=obj.ra) }}" data-toggle="tooltip" title="Edit">
                   <img src="../static/img/editar.png" width="30px"></a>
-              <a class="delete" href="#" title="Delete"><img src="../static/img/excluir.png" width="20px"></a>
+              <a class="delete" href="{{ url_for('delete_student', id=obj.id) }}" title="Delete"><img src="../static/img/excluir.png" width="20px"></a>
           </td>
         </tr>
       {% endfor %}

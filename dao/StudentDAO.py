@@ -1,8 +1,8 @@
 from models import Student
 
-SQL_CREATE = 'INSERT INTO student(ra, cpf, first_name, last_name, phone, date_create, date_update) VALUES (%s, %s, %s, %s, %s, now(), now())'
-SQL_RETRIEVE = 'SELECT id, ra, cpf, first_name, last_name, phone, date_create, date_update FROM student ORDER BY date_update DESC'
-SQL_RETRIEVE_RA = 'SELECT id, ra, cpf, first_name, last_name, phone, date_create, date_update FROM student WHERE ra = %s'
+SQL_CREATE = 'INSERT INTO student(ra, doc_id, first_name, last_name, phone, date_create, date_update) VALUES (%s, %s, %s, %s, %s, now(), now())'
+SQL_RETRIEVE = 'SELECT id, ra, doc_id, first_name, last_name, phone, date_create, date_update FROM student ORDER BY date_update DESC'
+SQL_RETRIEVE_RA = 'SELECT id, ra, doc_id, first_name, last_name, phone, date_create, date_update FROM student WHERE ra = %s'
 SQL_UPDATE = 'UPDATE student SET first_name=%s, last_name=%s, phone=%s, date_update=%s WHERE id=%s'
 SQL_DELETE = 'DELETE FROM student WHERE id = %s'
 
@@ -16,7 +16,7 @@ class StudentDAO:
         if student.id:
             cursor.execute(SQL_UPDATE,(student.first_name, student.last_name, student.phone, student.date_update,student.id))
         else:
-            cursor.execute(SQL_CREATE, (student.ra,student.cpf,student.first_name, student.last_name, student.phone))
+            cursor.execute(SQL_CREATE, (student.ra,student.doc_id,student.first_name, student.last_name, student.phone))
         self.__db.connection.commit()
         return student
 
